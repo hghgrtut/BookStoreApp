@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BookStore</string>
+    <string name="book_name">Название книги</string>
+    <string name="change_theme">Сменить тему</string>
+    <string name="copy_link">Скопировать ссылку</string>
+    <string name="search_book">Искать книгу</string>
+    <string name="price">Цена: %1$.2f бел.руб.</string>
+    <string name="go_to">На сайт</string>
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="size_button_copy">32dp</dimen>
+    <dimen name="size_button_search">48dp</dimen>
+    <dimen name="size_logo">64dp</dimen>
+    <dimen name="S">4dp</dimen>
+    <dimen name="M">8dp</dimen>
+    <dimen name="L">16dp</dimen>
+</resources>
