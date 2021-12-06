@@ -1,8 +1,7 @@
 package by.profs.bookstore.presenter.api
 
 import by.profs.bookstore.data.ParseObject
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.*
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -17,11 +16,12 @@ object ApiImplementation {
         .build()
         .create(ApiInterface::class.java)
 
-    suspend fun getPrices(bookName: String): Flow<List<ParseObject>> {
-        val response = service.getPrices(bookName)
-        if (response.isSuccessful) return listOf(response.body()!!).asFlow()
-        else throw IllegalStateException(response.errorBody().toString())
-    }
+    suspend fun getPrices(bookName: String): Flow<List<ParseObject>> =
+        try { with(service.getPrices(bookName)) {
+            if (isSuccessful) listOf(body()!!).asFlow() else emptyFlow() }
+        } catch (e: Exception) {
+            emptyFlow()
+        }
 }
 
 private interface ApiInterface {

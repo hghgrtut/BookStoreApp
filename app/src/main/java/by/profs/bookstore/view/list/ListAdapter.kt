@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.profs.bookstore.R
 import by.profs.bookstore.app.ServiceLocator.locateLazy
-import by.profs.bookstore.data.Shops
 import by.profs.bookstore.data.ParseObject
 import by.profs.bookstore.databinding.ItemBookBinding
+import coil.load
 
 class ListAdapter(private val items: List<ParseObject>)
     : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -19,27 +19,30 @@ class ListAdapter(private val items: List<ParseObject>)
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemBookBinding.bind(view)
-        val logo = binding.logo
+        val author = binding.authorBook
+        val image = binding.image
         val price = binding.price
-        val shop = binding.shop
+        val title = binding.titleBook
         val goTo = binding.link
-        val copyLink = binding.copyLink
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_book, parent, false))
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder) {
         val item = items[position]
-        holder.price.text = context.getString(R.string.price, item.price)
-        holder.shop.text = item.shop
-        holder.goTo.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.link)).apply {
+        goTo.setOnClickListener {
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.link)).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }
-            context.startActivity(intent)
+            })
         }
-        holder.logo.setImageResource(Shops.valueOf(item.shop.uppercase()).logo)
+        image.load(item.picUrl) {
+            crossfade(true)
+            placeholder(R.drawable.animation_load)
+        }
+        author.text = item.author
+        price.text = context.getString(R.string.price, item.price)
+        title.text = item.title
     }
 
     override fun getItemCount(): Int = items.size
