@@ -11,10 +11,12 @@ import by.profs.bookstore.R
 import by.profs.bookstore.app.ServiceLocator.locateLazy
 import by.profs.bookstore.data.ParseObject
 import by.profs.bookstore.databinding.ItemBookBinding
+import com.bumptech.glide.Glide
 import coil.load
 
 class ListAdapter(private val items: List<ParseObject>)
     : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+
     private val context: Context by locateLazy()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -36,6 +38,11 @@ class ListAdapter(private val items: List<ParseObject>)
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             })
         }
+//        Glide.with(image)
+//            .load(item.picUrl)
+//            .error(R.drawable.animation_load)
+//            .placeholder(R.drawable.animation_load)
+//            .into(image)
         image.load(item.picUrl) {
             crossfade(true)
             placeholder(R.drawable.animation_load)

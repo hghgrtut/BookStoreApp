@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/S"
         android:hint="@string/book_name"
-        app:layout_constraintEnd_toStartOf="@id/button_search"
+        app:layout_constraintEnd_toStartOf="@id/voice_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,6 +24,19 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
+        android:id="@+id/voice_input"
+        android:layout_width="@dimen/size_button_search"
+        android:layout_height="@dimen/size_button_search"
+        android:src="@drawable/ic_mic"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/search_book"
+        android:layout_margin="@dimen/M"
+        app:layout_constraintStart_toEndOf="@id/search"
+        app:layout_constraintEnd_toStartOf="@id/button_search"
+        app:layout_constraintBottom_toBottomOf="@id/search"
+        app:layout_constraintTop_toTopOf="@id/search" />
+
+    <ImageButton
         android:id="@+id/button_search"
         android:layout_width="@dimen/size_button_search"
         android:layout_height="@dimen/size_button_search"
@@ -31,6 +44,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/search_book"
         android:layout_margin="@dimen/M"
+        app:layout_constraintStart_toEndOf="@id/voice_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/search"
         app:layout_constraintTop_toTopOf="@id/search" />

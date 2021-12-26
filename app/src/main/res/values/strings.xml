@@ -6,4 +6,5 @@
     <string name="search_book">Искать книгу</string>
     <string name="price">Цена: %1$.2f бел.руб.</string>
     <string name="go_to">На сайт</string>
+    <string name="voice_search_hint">Скажите название книги</string>
 </resources>
